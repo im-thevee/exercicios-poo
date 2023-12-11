@@ -1,9 +1,12 @@
 from busao import Onibus
 from motorista import Motorista
-
 class Sistema:
     def __init__(self):
-        self.lista_onibus = [Onibus('Cidade Verde', '399', 'XML219394')]
+        self.lista_onibus = [
+                            Onibus('Cidade Verde', '399', 'XML219394'),
+                            Onibus('Vale do Sol', 'V', 'HTML2394'),
+                            Onibus('Interbairros', '4', 'P4UL023')
+                             ]
         self.lista_motoristas = [Motorista('Augusto', '1'), Motorista('Marcola','2'), Motorista('Higor O Cara', '3')]
         
     def adicionar_motorista(self, motorista: Motorista):
@@ -63,9 +66,21 @@ class Sistema:
         escolha_onibus = int(input('ID escolhido: '))
         onibus = self.lista_onibus[escolha_onibus]
         motorista.vincular_onibus(onibus)
-        print(f'Motorista {motorista.getNome()} vinculado ao {onibus.getNome()}')
+        onibus.vincular_motorista(motorista)
+        print(f'O motorista {motorista.getNome()} vinculado ao {onibus.getNome()}')
+        print(f'O onibus {onibus.getNome()} foi vinculado ao {motorista.getNome()}')
         self.voltar_inicio()
-  
+
+    def exibir_motorista_onibus(self):
+        print('------- | Motoristas vinculados aos onibus | -------')
+        for motorista in self.lista_motoristas:
+            print(f'| Motorista: {motorista.getNome()} | {motorista.getLista()}')
+    
+    def exibir_onibus_motorista(self):
+        print('------- | Onibus vinculados aos motoristas | -------')
+        for onibus in self.lista_onibus:
+            print(f'| Onibus: {onibus.getNome()} | {onibus.getLista()}')
+        
     def voltar_inicio(self):
         voltar = int(input('Deseja volta para o menu iniciar?\n1- Sim 2- Não\n'))
         while voltar != 1 or voltar != 2:
@@ -82,6 +97,8 @@ class Sistema:
         print('ID 3 - Adicionar onibus')
         print('ID 4 - Adicionar motorista')
         print('ID 5 - Vincular motorista a um onibus')
+        print('ID 6 - Exibir motorista por onibus')
+        print('ID 7 - Exibir onibus por motorista')
         opcao = int(input('\nOpção escolhida: '))
 
         if opcao == 1:
@@ -104,9 +121,14 @@ class Sistema:
             self.vincular_motorista_onibus()
             self.voltar_inicio
 
+        elif opcao == 6:
+            self.exibir_motorista_onibus()
+            self.voltar_inicio()
+        
+        elif opcao == 7:
+            self.exibir_onibus_motorista()
+            self.voltar_inicio()
+
         else: 
             print('Opcao Invalida')
             self.voltar_inicio()
-
-sistema = Sistema()
-sistema.inicio_sistema()

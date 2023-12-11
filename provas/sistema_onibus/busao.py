@@ -1,5 +1,3 @@
-from motorista import Motorista
-
 class Onibus:
     def __init__(self, nome, numero, placa):
         self.nome = nome
@@ -19,6 +17,11 @@ class Onibus:
     def setPlaca(self, nova_placa):
         self.placa = nova_placa
     
-    def vincular_motorista(self, motorista: Motorista):
-        self.lista_onibus.append(motorista)
-
+    def getLista(self):
+        retorno = 'Motorista Vinculado: '
+        for motorista in self.lista_motoristas:
+            retorno += motorista.getNome() + " | "
+        return retorno
+        
+    def vincular_motorista(self, motorista):
+        self.lista_motoristas.append(motorista)

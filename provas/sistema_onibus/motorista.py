@@ -12,6 +12,12 @@ class Motorista:
     def setNome(self, novo_nome):
         self.nome = novo_nome
     
+    def getLista(self):
+        retorno = 'Onibus Vinculado: '
+        for onibus in self.lista_onibus:
+            retorno += onibus.getNome() + " | "
+        return retorno
+    
     def getNome(self):
         return self.nome
     
