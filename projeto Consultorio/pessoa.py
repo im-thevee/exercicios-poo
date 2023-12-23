@@ -1,12 +1,3 @@
-from datetime import datetime
-
-def validar_cpf(func):
-    def wrapper(self, value):
-        if len(value) != 11:
-            raise ValueError("CPF inválido")
-        return func(self, value)
-    return wrapper
-
 class Pessoa:
     def __init__(self, nome, cpf, data_nascimento, sexo):
         self._nome = nome
@@ -49,48 +40,46 @@ class Pessoa:
 class Paciente(Pessoa):
     def __init__(self, nome, cpf, data_nascimento, sexo, altura, peso):
         super().__init__(nome, cpf, data_nascimento, sexo)
-        self._altura = altura
-        self._peso = peso
+        self.__altura = altura
+        self.__peso = peso
+
+    def __str__(self) -> str:
+        return f'| Nome : {self._nome} | CPF: {self._cpf} | Data: {self._data_nascimento} | Sexo: {self._sexo} | Altura: {self.__altura} | Peso: {self.__peso} |'
 
     @property
     def altura(self):
-        return self._altura
+        return self.__altura
 
     @altura.setter
     def altura(self, value):
-        self._altura = value
+        self.__altura = value
 
     @property
     def peso(self):
-        return self._peso
+        return self.__peso
 
     @peso.setter
     def peso(self, value):
-        self._peso = value
+        self.__peso = value
 
     @property
     def cpf(self):
-        return self._cpf
+        return self.__cpf
 
     @cpf.setter
-    @validar_cpf
     def cpf(self, value):
-        self._cpf = value
+        self.__cpf = value
 
 class ProfissionalSaude(Pessoa):
     def __init__(self, nome, cpf, data_nascimento, sexo, crm):
         super().__init__(nome, cpf, data_nascimento, sexo)
-        self._crm = crm
+        self.__crm = crm
 
     @property
     def crm(self):
-        return self._crm
+        return self.__crm
 
     @crm.setter
     def crm(self, value):
-        self._crm = value
+        self.__crm = value
 
-# Exemplo de Uso
-paciente1 = Paciente("Maria", "12345678900", "1990-05-15", "Feminino", 165, 55)
-print(paciente1.cpf)  # Obtendo o CPF
-paciente1.cpf = "12345"  # Tentativa de definir um CPF inválido
