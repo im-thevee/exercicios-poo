@@ -1,11 +1,14 @@
 from pessoa import Pessoa, Paciente, ProfissionalSaude
 
-class Agendamentos:
-    def __init__(self, profissional_saude, paciente, data, hora):
+class Agendamento:
+    def __init__(self, profissional_saude: ProfissionalSaude, paciente: Paciente, data, hora):
         self.__profissional_saude = profissional_saude
         self.__paciente = paciente
         self.__data = data
         self.__hora = hora
+
+    def __str__(self) -> str:
+        return f'| Profissional da saúde: {self.__profissional_saude.nome} | Paciente: {self.__paciente.nome} | Data: {self.__data} às {self.__hora} horas'
 
     @property
     def profissional_saude(self):
@@ -17,16 +20,24 @@ class Agendamentos:
 
     @property
     def paciente(self):
-        return self._paciente
+        return self.__paciente
 
     @paciente.setter
     def paciente(self, novo_paciente):
-        self._paciente = novo_paciente
+        self.__paciente = novo_paciente
 
     @property
     def data(self):
-        return self._data
+        return self.__data
 
     @data.setter
     def data(self, nova_data):
-        self._data = nova_data
+        self.__data = nova_data
+
+    @property
+    def hora(self):
+        return self.__hora
+
+    @hora.setter
+    def hora(self, nova_hora):
+        self.__data = nova_hora

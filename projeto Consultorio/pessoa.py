@@ -62,18 +62,13 @@ class Paciente(Pessoa):
     def peso(self, value):
         self.__peso = value
 
-    @property
-    def cpf(self):
-        return self.__cpf
-
-    @cpf.setter
-    def cpf(self, value):
-        self.__cpf = value
-
 class ProfissionalSaude(Pessoa):
     def __init__(self, nome, cpf, data_nascimento, sexo, crm):
         super().__init__(nome, cpf, data_nascimento, sexo)
         self.__crm = crm
+
+    def __str__(self) -> str:
+        return f'| Nome : {self._nome} | CPF: {self._cpf} | Data: {self._data_nascimento} | Sexo: {self._sexo} | CRM: {self.__crm} |'
 
     @property
     def crm(self):
